@@ -8,9 +8,10 @@ def get_value(obj: dict, key:str)-> Optional[str]:
     try:
         keys = key.split('/')
         for k in keys:
-            if type(k) != dict:
+            if type(value) != dict:
                 raise TypeError()
-            value = value[k]
+            # Key may be any kind
+            value = value[k] if k in value.keys() else value[eval(k)]
     except KeyError:
         print("Invalid Key", k)
         return None # Incase of key error returns None
